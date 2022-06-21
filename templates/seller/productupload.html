@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    
+    <h3>Upload your Product</h3>
+    
+    <form action="{% url 'productupload' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="product_name" class="form-label">Name</label>
+            <input type="text" class="form-control" placeholder="Name" name="product_name">
+         </div> <!-- form-group// -->
+        <div class="form-group">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" placeholder="Description" name="description">
+         </div> <!-- form-group// -->
+        <div class="form-group">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" class="form-control" placeholder="Price" name="price">
+         </div> <!-- form-group// -->
+        <div class="form-group">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" placeholder="Upload your image" name="image">
+         </div> <!-- form-group// -->
+    
+        <div class="form-group">
+            <label for="Stock" class="form-label">Stock</label>
+            <input type="number" class="form-control" placeholder="How many you got?" name="stock">
+         </div> <!-- form-group// -->
+        
+         <label for="category" class="form-label">Choose a Category</label>
+        <input type="text" class="form-control" name="category" list="cat">
+            <datalist id="cat">
+                {% for category in categories %}    
+                    <option value="{{category.category_name}}">{{category.category_name}}</option>
+                {% endfor %}
+            </datalist>
+         
+        <br>
+    
+        <button class="btn btn-danger">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
