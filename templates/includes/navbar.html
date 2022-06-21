@@ -100,6 +100,8 @@
                 {% if request.user.is_authenticated %}
                 <small class="title text-muted">Welcome {{request.user.username}}!</small>
                 <a href="{% url 'logout' %}">Logout</a>
+                <span class="dark-transp"> | </span>
+                <a href="{% url 'placedOrders' %}">Check Placed Orders</a>
                 {% else %}
                 <small class="title text-muted">Welcome guest!</small>
                 <a href="{% url 'register' %}"> Register</a>

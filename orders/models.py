@@ -36,11 +36,11 @@ class OrderItems(models.Model):
 
     order = models.ForeignKey(Orders, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    # seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, default=2, on_delete=models.CASCADE)
     order_item_status = models.CharField(max_length=255, default=PENDING, choices=ORDER_STATUS_CHOICES)
 
     class Meta:
         verbose_name_plural = 'Order Items'
 
     def __str__(self) -> str:
-        return self.order.order_id + ' ' + self.product.product_name + ' ' + self.order.order_item_status
+        return self.order.order_id + ' ' + self.product.product_name + ' ' + self.order_item_status

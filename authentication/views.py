@@ -81,7 +81,7 @@ def postLogin(request):
             return HttpResponse("Check the details properly")
 
 def logoutt(request):
-
+    request.session.flush()
     logout(request)
 
     return redirect('home')

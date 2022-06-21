@@ -4,9 +4,29 @@ from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from store.models import *
 from store.models import Category
+from orders.models import Orders, OrderItems
 
 def dashboard(request):
     return render(request, 'seller/dashboard.html')
+
+def orders_received(request):
+
+    user = User.objects.get(username = request.user.username)
+
+    seller = Seller.objects.get(user = request.user)
+
+    # Getting the User who ordered the items
+
+    orderItems = OrderItems.objects.filter(
+        seller = seller
+    )
+
+    context = {
+        'orderItems': orderItems,
+    }
+    
+
+    return render(request, 'seller/orders-received.html', context)
 
 def generate_product_slug(product_name):
 
